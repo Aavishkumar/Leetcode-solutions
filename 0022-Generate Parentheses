@@ -1,0 +1,26 @@
+int x;
+class Solution {
+public:
+    void ps(int no,int nc,string s,vector<string> &ve){
+        if(no>nc) return;
+        if(no>0){
+            ps(no-1,nc,s+"(",ve);
+        }
+        if(nc>0){
+            ps(no,nc-1,s+")",ve);
+        }
+        if(s.size()==x){
+            ve.push_back(s);
+        }
+        
+    }
+    
+    vector<string> generateParenthesis(int n) {
+        x=2*n;
+        int no=n,nc=n;
+        vector<string> ve;
+        string s="";
+        ps(no,nc,s,ve);
+        return ve;
+    }
+};
