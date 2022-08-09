@@ -1,0 +1,35 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int n=s.size();
+        bool dp[n][n];    // make a boolean dp of size n*n
+        int maxlen=1;     // min possible length of a palindrome
+        int st=0; 
+        memset(dp,0,sizeof(dp));
+        int i;
+        for(int i=0;i<n;i++){
+            dp[i][i]=1;             // each letter is its own palindrome
+        }
+        for(int i=0;i<n-1;i++){
+            if(s[i]==s[i+1]){
+                st=i;
+                maxlen=2;
+                dp[i][i+1]=1;       // check palindrome of size 2
+            }
+        }
+        for(int gap=3;gap<=n;gap++){          // check all possible palindrome of size from 3 to n
+            for(int i=0;i<n-gap+1;i++){       // starting position of palindromes
+                int j=i+gap-1;                // index of last character of current string
+                if(dp[i+1][j-1] && s[i]==s[j]){      // checking for sub-string from ith index to jth index iff str[i+1] to str[j-1] is a palindrome
+                    dp[i][j]=1;
+                    if(gap>maxlen){
+                        maxlen=gap;
+                        st=i;
+                    }
+                }
+                
+            }
+        }
+        return s.substr(st,maxlen);
+    }
+};
