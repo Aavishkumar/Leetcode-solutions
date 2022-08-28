@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+class Solution {
+public:
+    vector<vector<int>> diagonalSort(vector<vector<int>>& mat) {
+        int n=mat.size();
+        int m=mat[0].size();
+        cout<<n<<" "<<m<<endl;
+        int i1=n-1;
+        int j1=0;
+        while(j1!=m){
+            int i2=i1;
+            int j2=j1;
+            vector<int> ve;
+            ve.clear();
+            while(i2!=n && j2!=m){
+                ve.push_back(mat[i2][j2]);
+                i2++;
+                j2++;
+            }
+            sort(ve.begin(),ve.end());
+            i2=i1;
+            j2=j1;
+            int x=0;
+            while(x<ve.size()){
+                mat[i2][j2]=ve[x];
+                i2++;
+                x++;
+                j2++;
+            }
+            if(i1==0) j1++;
+            else i1--;
+        }
+        return mat;
+    }
+};
